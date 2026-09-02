@@ -246,6 +246,46 @@ body {
   height: 0.95rem;
 }
 
+.house-session {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 1.15rem 0 1.05rem;
+  border-bottom: 1px solid var(--ink);
+}
+
+.house-session button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  cursor: pointer;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.house-session button:hover > span:first-child,
+.house-session button:focus-visible > span:first-child {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+.house-session [data-vitrola-count] {
+  margin-left: 0.45rem;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
 .colophon {
   grid-column: 1 / -1;
   margin-top: 2.5rem;

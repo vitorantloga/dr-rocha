@@ -13,7 +13,7 @@
   <body>
     <!--
     THESIS: House letterhead with a phonograph seal — the list is still the document, the vitrola is the house mark.
-    OWN-WORLD: Uncoated cool paper #E8E7E2, black ink #141414, hairline rules, Schibsted Grotesk; grooved disc + engraving seal; round overlay on mockups only.
+    OWN-WORLD: Uncoated cool paper #E8E7E2, black ink #141414, hairline rules, Schibsted Grotesk; grooved disc + engraving seal; overlay disc on mockups, session notes from the gallery staff.
     STORY: Visitor sees VITROLA as a phonograph house, understands this is the evaluation room for Dr. Rocha, opens a prototype, returns via the floating seal.
     FIRST VIEWPORT: Phonograph seal at mark scale, left of the lockup; antique wordmark; trade line small and right-aligned under Vitrola; heading, lede, numbered rail.
     FORM: House letterhead / contents of enclosures · grounded #7 · seed b0c0991b. The disc is the named raise: the object the house is named for.
@@ -58,8 +58,15 @@
         </ol>
       </section>
 
+      <p class="house-session">
+        <button type="button" data-vitrola="session" aria-haspopup="dialog" aria-controls="vitrola-panel">
+          <span>Anotações da sessão <span data-vitrola-count hidden></span></span>
+          <span class="rail__go">Abrir <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span>
+        </button>
+      </p>
+
       <footer class="colophon">
-        <p>Cliente {{client}}. Nos protótipos, o selo redondo da VITROLA volta a esta lista.</p>
+        <p>Cliente {{client}}. Nos protótipos, o selo redondo abre o menu da casa. Gerar o zip limpa a sessão e volta para esta home.</p>
       </footer>
     </div>
   </body>

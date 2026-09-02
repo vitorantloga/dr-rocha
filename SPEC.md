@@ -109,7 +109,7 @@ Qualquer arquivo da pasta é servido em `/mocks/mockup-05/`. Sem `package.json`,
 | `/mocks/mockup-01/`  | Mockup 01                     |
 | `/api/prototypes`    | JSON da lista (descoberta)    |
 
-Em cada mockup o serviço injeta um selo redondo (vitrola) no canto, com link para `/`. Não é preciso colocar esse botão no HTML do mockup — pastas novas recebem o selo automaticamente. `npm run dev` dentro da pasta do mockup, isolado, não mostra o selo.
+Em cada mockup o serviço injeta o overlay da VITROLA (`/overlay.js`), o mesmo módulo em todos eles, com a mesma sessão no navegador. O selo redondo abre um painel da casa: Home (volta a `/`), Anotar (lápis, texto, gravar, desfazer, refazer) e Anotações da sessão (ver, remover, gerar zip). A home da galeria também tem o link para as anotações da sessão. Gravar tira um print da tela com o desenho e guarda a imagem no IndexedDB do browser. Gerar zip baixa `feedback-vitrola-mockups[ano-mes-dia-hora-min-seg].zip`, limpa a sessão e volta para `/`. Não é preciso colocar o overlay no HTML do mockup — pastas novas recebem-no automaticamente. `npm run dev` dentro da pasta do mockup, isolado, não mostra o selo.
 
 ## `client.json`
 
@@ -118,7 +118,7 @@ Textos da página inicial. Em outro cliente, mude `client`, `lede` e o que mais 
 ## Independência
 
 - HTML, CSS, JS e dados de um mockup não vazam para outro.
-- O índice não pinta o mockup com o tema da VITROLA. Só o selo redondo de volta é injetado pelo `node start`.
+- O índice não pinta o mockup com o tema da VITROLA. Só o overlay da casa (selo, menu, anotações) é injetado pelo `node start`.
 - Portas individuais (`npm run dev` dentro da pasta) continuam válidas para trabalho isolado. Para mostrar ao cliente, use `node start`.
 
 ## Disponibilizar

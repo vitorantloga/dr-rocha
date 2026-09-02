@@ -162,7 +162,7 @@ Page padding is `{spacing.gutter}` on the sides, a slightly taller clamp on top,
 
 The rail is a four-track row on a wide viewport: index (3.25rem), slug (`minmax(6.5rem, 11rem)`), copy, then status and “Abrir” as the trailing auto column. Below 720px it stacks to index + copy / id+status / go. Indices are zero-padded two-digit tabular numbers.
 
-The overlay is not a gallery module. It is injected onto mockup HTML (`node start`) as a 3.5rem circle, fixed to the bottom-right safe-area inset, linking home.
+The overlay is house chrome on mockups, plus the session sheet when opened from the gallery letterhead. It is injected by `node start` as a 3.5rem circle on mockup pages, fixed to the bottom-right safe-area inset. The disc opens the house menu (home, annotate, session notes); it does not itself navigate. The gallery keeps a staff-line link to session notes; the floating disc stays hidden there until the sheet is open.
 
 ### Named Rules
 **The Module Rule.** One grid, typographic state. Modules are flush-left blocks on the sheet. Do not center the brief as a card, and do not park content in interior columns for decoration.
@@ -192,7 +192,7 @@ Square letterhead. Radius is `{rounded.none}` on the skip link, rows, sheet, and
 
 ## Components
 
-This letterhead has no product buttons, chips, or cards. The numbered row is the only action on the gallery.
+This letterhead has no product buttons, chips, or cards. The numbered row opens a prototype. After the staff, a single ink line links to session notes — underline on hover, same as a title, not a filled control.
 
 ### Skip link
 - **Shape:** square; padding 0.35rem 0.6rem
@@ -222,7 +222,7 @@ Headline plus lede in the 38rem measure. Lede uses diluted ink. This is the lett
 One line of diluted ink. Folder names in `code` inherit the grotesque at weight 600, ink.
 
 ### Overlay return (signature)
-Injected by the prototype server onto mockup HTML only — never onto the gallery. Round paper disc, 3.5rem, 1px ink border, engraving fill, fixed bottom-right. Links home with accessible name “Voltar à sala VITROLA”. Hover rises 1px and deepens the drop; focus-visible is the wine ring. Under reduced motion, hover does not translate. This is return chrome, not a gallery CTA.
+Injected by the prototype server onto mockup HTML and onto the gallery (for session notes). On mockups: round paper disc, 3.5rem, 1px ink border, engraving fill, fixed bottom-right. Opens the house drawer (paper, ink staff rows: Home, Anotar, Anotações da sessão). The disc slides with the drawer; annotate expands the same sheet to a transparent full viewport with square ink tools; session expands it as a paper sheet of saved prints. After zip, the session clears and the browser returns to the gallery. On the gallery, the idle disc is hidden; the letterhead staff link opens the same session sheet. Hover rises 1px and deepens the drop; focus-visible is the wine ring. Under reduced motion, hover does not translate. This is house chrome, not a product CTA.
 
 ### Colophon
 Label size, diluted ink, flush left. Client fact plus the round-seal return: the overlay, not browser-back copy, is how mockups send the visitor home.
@@ -243,4 +243,4 @@ Label size, diluted ink, flush left. Client fact plus the round-seal return: the
 - **Don't** add a kicker or room-label above the heading; the trade line under the wordmark is the only house identification.
 - **Don't** animate rows on entrance, stagger, or cascade. The sheet is still; the only motion is the groove spin.
 - **Don't** put IM Fell English on the rail, brief, or overlay chrome — it is the nameplate only. The rail opens prototypes; the disc is the house seal, not a CTA.
-- **Don't** round anything except the disc, spin the engraving, or place the overlay on the gallery.
+- **Don't** round anything except the disc, spin the engraving, or park a floating disc on the idle gallery.

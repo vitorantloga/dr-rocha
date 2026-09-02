@@ -125,33 +125,40 @@ function renderGallery() {
   })
   const mocks = discoverMocks()
   const template = fs.readFileSync(path.join(GALLERY_DIR, 'index.html'), 'utf8')
-  return template
-    .replaceAll('{{studio}}', esc(client.studio))
-    .replaceAll('{{trade}}', esc(client.trade))
-    .replaceAll('{{client}}', esc(client.client))
-    .replaceAll('{{heading}}', esc(client.heading))
-    .replaceAll('{{lede}}', esc(client.lede))
-    .replace('<!-- @prototypes -->', listMarkup(mocks))
+  return injectOverlay(
+    template
+      .replaceAll('{{studio}}', esc(client.studio))
+      .replaceAll('{{trade}}', esc(client.trade))
+      .replaceAll('{{client}}', esc(client.client))
+      .replaceAll('{{heading}}', esc(client.heading))
+      .replaceAll('{{lede}}', esc(client.lede))
+      .replace('<!-- @prototypes -->', listMarkup(mocks)),
+  )
 }
 
+const OVERLAY_ASSETS = new Set([
+  '/styles.css',
+  '/overlay.css',
+  '/overlay.js',
+  '/html2canvas.min.js',
+  '/modern-screenshot.js',
+  '/vitrola-mark.png',
+])
+
+const OVERLAY_HEAD = `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" />
+<script type="module" src="/overlay.js"></script>`
+
 function injectOverlay(html) {
-  if (!html || html.includes('vitrola-home')) return html
-  let out = html
-  if (out.includes('</head>')) {
-    out = out.replace('</head>', `<link rel="stylesheet" href="/overlay.css" />\n</head>`)
+  if (!html || html.includes('/overlay.js')) return html
+  if (html.includes('</head>')) {
+    return html.replace('</head>', `${OVERLAY_HEAD}\n</head>`)
   }
-  const button = `<a class="vitrola-home" href="/" aria-label="Voltar à sala VITROLA"><img src="/vitrola-mark.png" alt="" width="56" height="56" /></a>`
-  if (out.includes('</body>')) {
-    out = out.replace('</body>', `${button}\n</body>`)
-  } else {
-    out += button
-  }
-  return out
+  return `${OVERLAY_HEAD}\n${html}`
 }
 
 function vitrolaHomePlugin() {
   return {
-    name: 'vitrola-home',
+    name: 'vitrola-overlay',
     transformIndexHtml(html) {
       return injectOverlay(html)
     },
@@ -289,7 +296,7 @@ async function main() {
       return
     }
 
-    if (url === '/styles.css' || url === '/overlay.css' || url === '/vitrola-mark.png') {
+    if (OVERLAY_ASSETS.has(url)) {
       const file = path.join(GALLERY_DIR, path.basename(url))
       if (fs.existsSync(file)) {
         serveFile(res, file)
