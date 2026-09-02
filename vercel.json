@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm ci",
+  "buildCommand": "npm run install:mocks && npm run build",
+  "outputDirectory": "dist",
+  "ignoreCommand": "exit 0",
+  "trailingSlash": true,
+  "rewrites": [
+    { "source": "/api/prototypes", "destination": "/api/prototypes.json" },
+    { "source": "/mocks/:slug/:path*", "destination": "/mocks/:slug/index.html" }
+  ]
+}

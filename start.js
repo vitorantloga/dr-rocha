@@ -2,15 +2,19 @@ import fs from 'node:fs'
 import http from 'node:http'
 import os from 'node:os'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { createServer as createViteServer, mergeConfig } from 'vite'
+import {
+  GALLERY_DIR,
+  OVERLAY_ASSETS,
+  discoverMocks,
+  injectOverlay,
+  publicPrototypeList,
+  renderGallery,
+  vitrolaHomePlugin,
+} from './sala.js'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const PORT = Number(process.env.PORT) || 4170
 const HOST = process.env.HOST || '0.0.0.0'
-const MOCKS_DIR = path.join(__dirname, 'mocks')
-const GALLERY_DIR = path.join(__dirname, 'gallery')
-const SKIP = new Set(['node_modules', 'dist', '.git'])
 const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -27,142 +31,6 @@ const MIME = {
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.txt': 'text/plain; charset=utf-8',
-}
-
-function esc(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-}
-
-function readJson(file, fallback) {
-  try {
-    return JSON.parse(fs.readFileSync(file, 'utf8'))
-  } catch {
-    return fallback
-  }
-}
-
-function isViteApp(dir) {
-  return ['vite.config.js', 'vite.config.mjs', 'vite.config.ts'].some((name) =>
-    fs.existsSync(path.join(dir, name)),
-  )
-}
-
-function humanize(slug) {
-  return slug.replace(/[-_]+/g, ' ')
-}
-
-export function discoverMocks(mocksDir = MOCKS_DIR) {
-  if (!fs.existsSync(mocksDir)) return []
-  return fs
-    .readdirSync(mocksDir, { withFileTypes: true })
-    .filter((entry) => {
-      if (!entry.isDirectory()) return false
-      if (entry.name.startsWith('.') || entry.name.startsWith('_')) return false
-      if (SKIP.has(entry.name)) return false
-      return true
-    })
-    .map((entry) => {
-      const dir = path.join(mocksDir, entry.name)
-      const meta = readJson(path.join(dir, 'prototype.json'), {})
-      const hasIndex = fs.existsSync(path.join(dir, 'index.html'))
-      const vite = isViteApp(dir)
-      return {
-        slug: entry.name,
-        dir,
-        title: meta.title || humanize(entry.name),
-        summary: meta.summary || '',
-        status: meta.status || '',
-        hidden: Boolean(meta.hidden),
-        kind: vite ? 'vite' : 'static',
-        servable: hasIndex || vite,
-        href: `/mocks/${encodeURIComponent(entry.name)}/`,
-      }
-    })
-    .filter((mock) => mock.servable && !mock.hidden)
-    .sort((a, b) => a.slug.localeCompare(b.slug, 'en', { numeric: true }))
-}
-
-function listMarkup(mocks) {
-  if (!mocks.length) {
-    return `<li class="rail__empty">Nenhum protótipo em <code>mocks/</code>. Crie uma pasta <code>mockup-04</code> com um <code>index.html</code>.</li>`
-  }
-  return mocks
-    .map((mock, index) => {
-      const num = String(index + 1).padStart(2, '0')
-      const status = mock.status
-        ? `<span class="rail__status">${esc(mock.status)}</span>`
-        : ''
-      const summary = mock.summary
-        ? `<span class="rail__summary">${esc(mock.summary)}</span>`
-        : ''
-      return `<li>
-  <a class="rail__row" href="${esc(mock.href)}">
-    <span class="rail__num">${num}</span>
-    <span class="rail__id">${esc(mock.slug)}</span>
-    <span class="rail__copy">
-      <span class="rail__title">${esc(mock.title)}</span>
-      ${summary}
-    </span>
-    ${status}
-    <span class="rail__go">Abrir <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span>
-  </a>
-</li>`
-    })
-    .join('\n')
-}
-
-function renderGallery() {
-  const client = readJson(path.join(__dirname, 'client.json'), {
-    studio: 'VITROLA',
-    trade: 'Fábrica de software web',
-    client: 'Cliente',
-    heading: 'Protótipos para avaliação',
-    lede: '',
-  })
-  const mocks = discoverMocks()
-  const template = fs.readFileSync(path.join(GALLERY_DIR, 'index.html'), 'utf8')
-  return injectOverlay(
-    template
-      .replaceAll('{{studio}}', esc(client.studio))
-      .replaceAll('{{trade}}', esc(client.trade))
-      .replaceAll('{{client}}', esc(client.client))
-      .replaceAll('{{heading}}', esc(client.heading))
-      .replaceAll('{{lede}}', esc(client.lede))
-      .replace('<!-- @prototypes -->', listMarkup(mocks)),
-  )
-}
-
-const OVERLAY_ASSETS = new Set([
-  '/styles.css',
-  '/overlay.css',
-  '/overlay.js',
-  '/html2canvas.min.js',
-  '/modern-screenshot.js',
-  '/vitrola-mark.png',
-])
-
-const OVERLAY_HEAD = `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" />
-<script type="module" src="/overlay.js"></script>`
-
-function injectOverlay(html) {
-  if (!html || html.includes('/overlay.js')) return html
-  if (html.includes('</head>')) {
-    return html.replace('</head>', `${OVERLAY_HEAD}\n</head>`)
-  }
-  return `${OVERLAY_HEAD}\n${html}`
-}
-
-function vitrolaHomePlugin() {
-  return {
-    name: 'vitrola-overlay',
-    transformIndexHtml(html) {
-      return injectOverlay(html)
-    },
-  }
 }
 
 function send(res, status, body, type = 'text/html; charset=utf-8') {
@@ -254,13 +122,21 @@ async function bootVite(mock, index) {
 }
 
 function viteErrorPage(slug, message) {
-  return `<!doctype html><meta charset="utf-8"><title>${esc(slug)}</title>
+  return `<!doctype html><meta charset="utf-8"><title>${escHtml(slug)}</title>
 <body style="font:16px/1.45 system-ui;max-width:40rem;margin:3rem auto;padding:0 1.25rem">
 <p><a href="/">VITROLA</a></p>
-<h1>${esc(slug)}</h1>
-<p>Este mockup não subiu. Na pasta <code>mocks/${esc(slug)}</code> rode <code>npm install</code> e tente de novo.</p>
-<pre>${esc(message)}</pre>
+<h1>${escHtml(slug)}</h1>
+<p>Este mockup não subiu. Na pasta <code>mocks/${escHtml(slug)}</code> rode <code>npm install</code> e tente de novo.</p>
+<pre>${escHtml(message)}</pre>
 </body>`
+}
+
+function escHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
 }
 
 function lanAddresses() {
@@ -286,8 +162,7 @@ async function main() {
     const url = req.url.split('?')[0]
 
     if (url === '/api/prototypes') {
-      const publicList = discoverMocks().map(({ dir, ...mock }) => mock)
-      send(res, 200, JSON.stringify(publicList, null, 2), 'application/json; charset=utf-8')
+      send(res, 200, JSON.stringify(publicPrototypeList(), null, 2), 'application/json; charset=utf-8')
       return
     }
 

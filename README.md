@@ -36,13 +36,11 @@ cd ../mockup-03
 npm install
 ```
 
-No PowerShell, a partir da raiz `prototypes/`, o equivalente é:
+No PowerShell, a partir da raiz `prototypes/`:
 
 ```powershell
 npm install
-npm install --prefix mocks/mockup-01
-npm install --prefix mocks/mockup-02
-npm install --prefix mocks/mockup-03
+npm run install:mocks
 ```
 
 Isso só precisa ser feito de novo se alguém adicionar um mockup novo ou mudar o `package.json`.
@@ -98,7 +96,39 @@ PORT=4171 npm start
    - **Anotar** — lápis e texto sobre a tela
    - **Anotações da sessão** — prints gravados; dá para gerar um zip
 
-O selo só aparece quando você usa `npm start`. Se abrir um mockup isolado (`npm run dev` na pasta dele), o selo não entra.
+O selo aparece com `npm start` (local) e no site publicado. Se abrir um mockup isolado (`npm run dev` na pasta dele), o selo não entra.
+
+## Publicar (GitHub + Vercel)
+
+O **build** roda no GitHub, na `master`. A Vercel **não reconstrói**: só recebe o `dist/` já pronto.
+
+### 1. Secrets no GitHub
+
+No repositório: **Settings → Secrets and variables → Actions**. Crie:
+
+| Secret | Onde pegar |
+|--------|------------|
+| `VERCEL_TOKEN` | [Vercel → Account Settings → Tokens](https://vercel.com/account/tokens) |
+| `VERCEL_ORG_ID` | Vercel → Project → Settings → General → **Team ID** (ou o `orgId` em `.vercel/project.json` depois de `npx vercel link`) |
+| `VERCEL_PROJECT_ID` | A mesma tela, **Project ID** (ou `projectId` no `.vercel/project.json`) |
+
+### 2. Projeto na Vercel
+
+Framework: **Other**. O `vercel.json` já define `outputDirectory: dist`.
+
+Em **Settings → Git**, no **Ignored Build Step**, use `exit 0` (ou deixe o `ignoreCommand` do `vercel.json`). Assim um `git push` **não** dispara build na Vercel. Quem publica é o workflow `.github/workflows/deploy.yml`.
+
+### 3. Conferir
+
+Depois do push na `master`, abra **Actions** no GitHub. O job **Deploy** instala, gera o `dist/` e manda para a Vercel com `vercel deploy --prebuilt`.
+
+Para gerar o site estático na sua máquina:
+
+```bash
+npm run build
+```
+
+A pasta `dist/` é o que a Vercel publica.
 
 ## Trabalhar num mockup sozinho
 

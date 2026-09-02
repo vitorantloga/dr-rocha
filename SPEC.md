@@ -18,7 +18,9 @@ Não é preciso subir cada mockup numa porta. Cada um continua com HTML, CSS, da
 
 ```
 prototypes/
-  start.js            # node start
+  start.js            # npm start (dev)
+  build.js            # npm run build → dist/
+  vercel.json         # Vercel só publica dist/; o build é no GitHub
   client.json         # nome da casa, cliente, textos da sala
   gallery/            # índice VITROLA (esta página)
   mocks/
@@ -124,9 +126,9 @@ Textos da página inicial. Em outro cliente, mude `client`, `lede` e o que mais 
 ## Disponibilizar
 
 1. `node start` nesta máquina, com o cliente na mesma rede: use o URL `http://<ip>:4170` impresso no terminal.
-2. Ou suba o diretório `prototypes/` num host Node 24 e rode `npm install && node start`, com `PORT` e um reverse proxy se quiser HTTPS.
+2. Produção: `npm run build` gera `dist/`. O workflow em `.github/workflows/deploy.yml` faz isso na `master` e envia o resultado pronto para a Vercel (`vercel deploy --prebuilt`). A Vercel não rebuilda.
 
-O serviço escuta em `0.0.0.0`, de propósito.
+O `node start` escuta em `0.0.0.0`, de propósito.
 
 ## Git
 

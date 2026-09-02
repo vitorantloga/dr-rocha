@@ -5,7 +5,9 @@
   "type": "module",
   "description": "Sala de avaliação de protótipos VITROLA",
   "scripts": {
-    "start": "node start.js"
+    "start": "node start.js",
+    "build": "node build.js",
+    "install:mocks": "node install-mocks.js"
   },
   "engines": {
     "node": "24.x"
