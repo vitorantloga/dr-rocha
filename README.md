@@ -4,7 +4,7 @@ Este repositório é a **sala de avaliação** da VITROLA para o cliente Dr. Roc
 
 ## O que você precisa
 
-- [Node.js 20 ou mais recente](https://nodejs.org/)
+- [Node.js 24](https://nodejs.org/) (a Vercel exige `24.x`)
 - Um terminal (PowerShell no Windows serve)
 
 Confira a versão:
@@ -13,7 +13,7 @@ Confira a versão:
 node -v
 ```
 
-Deve aparecer `v20` ou maior (por exemplo `v22.11.0`).
+Deve aparecer `v24` (por exemplo `v24.11.0`).
 
 ## Primeira vez: instalar dependências
 
@@ -119,7 +119,7 @@ Para mostrar ao cliente, volte a usar `npm start` na raiz.
 
 | Sintoma | O que fazer |
 |---------|-------------|
-| `node` não é reconhecido | Instale o Node 20+ e abra um terminal novo |
+| `node` não é reconhecido | Instale o Node 24 e abra um terminal novo |
 | Página da sala abre, mas o mockup dá erro | Falta `npm install` **dentro** de `mocks/mockup-0X` |
 | Porta em uso | Use outra porta com `PORT=4171 npm start` |
 | Lista vazia | Confirme que existe `mocks/mockup-0X/index.html` |

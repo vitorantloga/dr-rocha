@@ -124,7 +124,7 @@ Textos da página inicial. Em outro cliente, mude `client`, `lede` e o que mais 
 ## Disponibilizar
 
 1. `node start` nesta máquina, com o cliente na mesma rede: use o URL `http://<ip>:4170` impresso no terminal.
-2. Ou suba o diretório `prototypes/` num host Node 20+ e rode `npm install && node start`, com `PORT` e um reverse proxy se quiser HTTPS.
+2. Ou suba o diretório `prototypes/` num host Node 24 e rode `npm install && node start`, com `PORT` e um reverse proxy se quiser HTTPS.
 
 O serviço escuta em `0.0.0.0`, de propósito.
 
