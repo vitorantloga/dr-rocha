@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#E8E7E2" />
+    <title>{{studio}} — {{heading}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <!--
+    THESIS: House letterhead with a phonograph seal — the list is still the document, the vitrola is the house mark.
+    OWN-WORLD: Uncoated cool paper #E8E7E2, black ink #141414, hairline rules, Schibsted Grotesk; grooved disc + engraving seal; round overlay on mockups only.
+    STORY: Visitor sees VITROLA as a phonograph house, understands this is the evaluation room for Dr. Rocha, opens a prototype, returns via the floating seal.
+    FIRST VIEWPORT: Phonograph seal at mark scale, left of the lockup; antique wordmark; trade line small and right-aligned under Vitrola; heading, lede, numbered rail.
+    FORM: House letterhead / contents of enclosures · grounded #7 · seed b0c0991b. The disc is the named raise: the object the house is named for.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+    -->
+    <a class="skip" href="#prototypes">Ir aos protótipos</a>
+    <div class="sheet">
+      <header class="mast">
+        <div class="lockup">
+          <div class="mast__seal" aria-hidden="true">
+            <svg class="grooves" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="99.2" fill="none" stroke="currentColor" stroke-width="1.15" />
+              <circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="0.45" />
+              <circle cx="100" cy="100" r="89" fill="none" stroke="currentColor" stroke-width="0.45" />
+              <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="0.45" />
+              <circle cx="100" cy="100" r="79" fill="none" stroke="currentColor" stroke-width="0.45" />
+              <circle cx="100" cy="100" r="74" fill="none" stroke="currentColor" stroke-width="0.45" />
+              <circle cx="100" cy="100" r="69" fill="none" stroke="currentColor" stroke-width="0.45" />
+              <circle cx="100" cy="100" r="64" fill="none" stroke="currentColor" stroke-width="0.45" />
+              <circle cx="100" cy="100" r="59" fill="none" stroke="currentColor" stroke-width="0.45" />
+              <circle cx="100" cy="100" r="54" fill="none" stroke="currentColor" stroke-width="0.45" />
+              <circle cx="100" cy="100" r="49" fill="none" stroke="currentColor" stroke-width="0.45" />
+              <circle cx="100" cy="100" r="38" fill="none" stroke="currentColor" stroke-width="1.15" />
+            </svg>
+            <img class="horn" src="/vitrola-mark.png" alt="" width="80" height="80" />
+          </div>
+          <div class="mast__id">
+            <p class="wordmark">{{studio}}</p>
+            <p class="trade">{{trade}}</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="brief">
+        <h1 id="heading">{{heading}}</h1>
+        <p class="lede">{{lede}}</p>
+      </section>
+
+      <section class="prototypes" id="prototypes" aria-labelledby="heading">
+        <ol class="rail">
+          <!-- @prototypes -->
+        </ol>
+      </section>
+
+      <footer class="colophon">
+        <p>Cliente {{client}}. Nos protótipos, o selo redondo da VITROLA volta a esta lista.</p>
+      </footer>
+    </div>
+  </body>
+</html>

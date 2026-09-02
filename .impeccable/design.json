@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-02T17:35:00.000Z",
+  "title": "Design System: VITROLA",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Uncoated Cool Paper",
+        "canonical": "#E8E7E2",
+        "tonalRamp": [
+          "#1A1A18",
+          "#333330",
+          "#4F4E4B",
+          "#6C6B67",
+          "#8E8D88",
+          "#B5B4AE",
+          "#D6D5D0",
+          "#E8E7E2"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Black Ink",
+        "canonical": "#141414",
+        "tonalRamp": [
+          "#141414",
+          "#2C2C2C",
+          "#474747",
+          "#656562",
+          "#8A8A87",
+          "#B1B0AB",
+          "#D4D3CE",
+          "#F4F3EE"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Diluted Ink",
+        "canonical": "color-mix(in srgb, #141414 62%, #E8E7E2)",
+        "tonalRamp": [
+          "#1A1A18",
+          "#2E2E2C",
+          "#454543",
+          "#656562",
+          "#8A8985",
+          "#AFAEA9",
+          "#D0CFCA",
+          "#EDECE8"
+        ]
+      },
+      "signal": {
+        "role": "secondary",
+        "displayName": "Focus Wine",
+        "canonical": "#9B1D2A",
+        "tonalRamp": [
+          "#3D0A10",
+          "#6A121C",
+          "#9B1D2A",
+          "#C42A3A",
+          "#D85C68",
+          "#E59098",
+          "#F2C4C8",
+          "#FAE8EA"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Studio wordmark only (VITROLA at letterhead scale)." },
+      "headline": { "displayName": "Headline", "purpose": "Brief h1 — the evaluation heading in the measure." },
+      "title": { "displayName": "Title", "purpose": "Prototype title on the numbered rail." },
+      "lede": { "displayName": "Lede", "purpose": "Brief paragraph in diluted ink." },
+      "body": { "displayName": "Body", "purpose": "Page default and trade line (trade at weight 500)." },
+      "label": { "displayName": "Label", "purpose": "Rail index, slug, status; colophon at weight 400." }
+    },
+    "shadows": [
+      {
+        "name": "overlay-rest",
+        "value": "0 8px 20px rgba(20, 20, 20, 0.16)",
+        "purpose": "Soft drop under the injected mockup overlay so the seal sits on a foreign page. Overlay-only; never on the letterhead."
+      },
+      {
+        "name": "overlay-hover",
+        "value": "0 12px 28px rgba(20, 20, 20, 0.2)",
+        "purpose": "Fuller overlay drop on hover, paired with a 1px rise. Overlay-only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "platter",
+        "value": "platter 90s linear infinite",
+        "purpose": "Slow rotation of the mast groove rings only. The engraving label does not spin. Disabled under prefers-reduced-motion."
+      },
+      {
+        "name": "overlay-hover-lift",
+        "value": "translateY(-1px)",
+        "purpose": "1px rise on overlay hover. Disabled under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      { "name": "rail-stack", "value": "720px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Skip Link",
+      "kind": "button",
+      "refersTo": "skip",
+      "description": "Ink-on-paper skip control; off-canvas until focused.",
+      "html": "<a class=\"ds-skip\" href=\"#prototypes\">Ir aos protótipos</a>",
+      "css": ".ds-skip { display: inline-block; padding: 0.35rem 0.6rem; background: #141414; color: #E8E7E2; font-family: \"Schibsted Grotesk\", system-ui, sans-serif; font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.01em; text-decoration: none; border-radius: 0; } .ds-skip:hover { text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; } .ds-skip:focus-visible { outline: 2px solid #9B1D2A; outline-offset: 3px; }"
+    },
+    {
+      "name": "Wordmark Mast",
+      "kind": "nav",
+      "refersTo": "wordmark",
+      "description": "Studio name at display scale, trade line, grooved disc trailing; closes on an ink staff rule.",
+      "html": "<header class=\"ds-mast\"><div class=\"ds-mast-id\"><p class=\"ds-wordmark\">VITROLA</p><p class=\"ds-trade\">Fábrica de software web</p></div><div class=\"ds-seal\" aria-hidden=\"true\"><svg class=\"ds-grooves\" viewBox=\"0 0 200 200\"><circle cx=\"100\" cy=\"100\" r=\"99.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.15\" /><circle cx=\"100\" cy=\"100\" r=\"94\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"89\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"84\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"79\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"74\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"69\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"64\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"59\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"54\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"49\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"38\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.15\" /></svg><span class=\"ds-horn\"></span></div></header>",
+      "css": ".ds-mast { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 1.25rem; padding-bottom: 1.35rem; border-bottom: 1px solid #141414; color: #141414; } .ds-wordmark { margin: 0; font-family: \"Schibsted Grotesk\", system-ui, sans-serif; font-size: clamp(3rem, 10vw, 6rem); font-weight: 700; line-height: 0.9; letter-spacing: -0.035em; color: #141414; } .ds-trade { margin: 0.7rem 0 0; font-family: \"Schibsted Grotesk\", system-ui, sans-serif; font-size: 1.0625rem; font-weight: 500; letter-spacing: -0.01em; color: #141414; } .ds-seal { position: relative; width: 7.25rem; height: 7.25rem; color: #141414; } .ds-grooves { position: absolute; inset: 0; width: 100%; height: 100%; animation: ds-platter 90s linear infinite; transform-origin: 50% 50%; } .ds-horn { position: absolute; inset: 22%; width: 56%; height: 56%; border-radius: 50%; background: #E8E7E2; } @keyframes ds-platter { to { transform: rotate(360deg); } } @media (prefers-reduced-motion: reduce) { .ds-grooves { animation: none; } }"
+    },
+    {
+      "name": "Phonograph Seal",
+      "kind": "custom",
+      "refersTo": "seal",
+      "description": "Grooved disc with the vitrola engraving as the still label; grooves-only 90s spin.",
+      "html": "<div class=\"ds-phonograph\" aria-hidden=\"true\"><svg class=\"ds-phonograph-grooves\" viewBox=\"0 0 200 200\"><circle cx=\"100\" cy=\"100\" r=\"99.2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.15\" /><circle cx=\"100\" cy=\"100\" r=\"94\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"89\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"84\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"79\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"74\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"69\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"64\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"59\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"54\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"49\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.45\" /><circle cx=\"100\" cy=\"100\" r=\"38\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.15\" /></svg><span class=\"ds-phonograph-label\"></span></div>",
+      "css": ".ds-phonograph { position: relative; width: 8.5rem; height: 8.5rem; color: #141414; } .ds-phonograph-grooves { position: absolute; inset: 0; width: 100%; height: 100%; animation: ds-phonograph-platter 90s linear infinite; transform-origin: 50% 50%; } .ds-phonograph-label { position: absolute; inset: 22%; width: 56%; height: 56%; border-radius: 50%; background: #E8E7E2; } @keyframes ds-phonograph-platter { to { transform: rotate(360deg); } } @media (prefers-reduced-motion: reduce) { .ds-phonograph-grooves { animation: none; } }"
+    },
+    {
+      "name": "Brief",
+      "kind": "custom",
+      "refersTo": "rail-title",
+      "description": "Heading and lede in the 38rem measure — letterhead purpose, not a hero card.",
+      "html": "<section class=\"ds-brief\"><h1>Protótipos para avaliação</h1><p class=\"ds-lede\">Estes são os protótipos do cliente Dr. Rocha. Esta página existe para você abrir cada versão, comparar e comentar.</p></section>",
+      "css": ".ds-brief { max-width: 38rem; } .ds-brief h1 { margin: 0 0 0.65rem; font-family: \"Schibsted Grotesk\", system-ui, sans-serif; font-size: clamp(1.65rem, 3vw, 2.15rem); font-weight: 600; line-height: 1.12; letter-spacing: -0.03em; color: #141414; } .ds-lede { margin: 0; color: color-mix(in srgb, #141414 62%, #E8E7E2); font-family: \"Schibsted Grotesk\", system-ui, sans-serif; font-size: 1.125rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }"
+    },
+    {
+      "name": "Rail Row",
+      "kind": "custom",
+      "refersTo": "rail-row",
+      "description": "Open numbered row on the ink staff — the only action on the letterhead.",
+      "html": "<a class=\"ds-rail-row\" href=\"#\"><span class=\"ds-rail-num\">01</span><span class=\"ds-rail-id\">mockup-01</span><span class=\"ds-rail-copy\"><span class=\"ds-rail-title\">Orientação inicial</span><span class=\"ds-rail-summary\">Queixa em linguagem natural até o próximo passo.</span></span><span class=\"ds-rail-go\">Abrir <svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M3 8h9M8 4l4 4-4 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"square\"/></svg></span></a>",
+      "css": ".ds-rail-row { display: grid; grid-template-columns: 3.25rem minmax(6.5rem, 11rem) minmax(0, 1fr) auto; column-gap: 1rem; align-items: baseline; padding: 1.15rem 0 1.05rem; border-top: 1px solid #141414; color: #141414; text-decoration: none; font-family: \"Schibsted Grotesk\", system-ui, sans-serif; background: transparent; border-radius: 0; } .ds-rail-row:hover .ds-rail-title, .ds-rail-row:focus-visible .ds-rail-title { text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; } .ds-rail-row:focus-visible { outline: 2px solid #9B1D2A; outline-offset: 3px; } .ds-rail-num, .ds-rail-id { font-variant-numeric: tabular-nums; color: color-mix(in srgb, #141414 62%, #E8E7E2); font-size: 0.92rem; font-weight: 500; } .ds-rail-copy { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; } .ds-rail-title { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; } .ds-rail-summary { color: color-mix(in srgb, #141414 62%, #E8E7E2); font-size: 0.98rem; line-height: 1.4; max-width: 48ch; } .ds-rail-go { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; letter-spacing: -0.01em; } .ds-rail-go svg { width: 0.95rem; height: 0.95rem; }"
+    },
+    {
+      "name": "Go Affordance",
+      "kind": "button",
+      "refersTo": "go",
+      "description": "Trailing “Abrir” plus square-cap arrow; lives inside the row, never as a filled CTA.",
+      "html": "<span class=\"ds-go\">Abrir <svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M3 8h9M8 4l4 4-4 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"square\"/></svg></span>",
+      "css": ".ds-go { display: inline-flex; align-items: center; gap: 0.35rem; font-family: \"Schibsted Grotesk\", system-ui, sans-serif; font-size: 1.2rem; font-weight: 600; letter-spacing: -0.01em; color: #141414; background: transparent; border-radius: 0; } .ds-go svg { width: 0.95rem; height: 0.95rem; }"
+    },
+    {
+      "name": "Overlay Return",
+      "kind": "button",
+      "refersTo": "overlay",
+      "description": "Round floating seal injected onto mockups; same mark, returns to the gallery. Not a gallery control.",
+      "html": "<a class=\"ds-overlay\" href=\"/\" aria-label=\"Voltar à sala VITROLA\"></a>",
+      "css": ".ds-overlay { box-sizing: border-box; display: grid; width: 3.5rem; height: 3.5rem; border: 1px solid #141414; border-radius: 50%; overflow: hidden; background: #E8E7E2; box-shadow: 0 8px 20px rgba(20, 20, 20, 0.16); cursor: pointer; color: inherit; text-decoration: none; } .ds-overlay:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(20, 20, 20, 0.2); } .ds-overlay:focus-visible { outline: 2px solid #9B1D2A; outline-offset: 3px; } @media (prefers-reduced-motion: reduce) { .ds-overlay:hover { transform: none; } }"
+    },
+    {
+      "name": "Empty Rail",
+      "kind": "custom",
+      "refersTo": "rail-row",
+      "description": "Empty staff line when mocks/ has nothing to open.",
+      "html": "<p class=\"ds-rail-empty\">Nenhum protótipo em <code>mocks/</code>. Crie uma pasta <code>mockup-04</code> com um <code>index.html</code>.</p>",
+      "css": ".ds-rail-empty { margin: 0; padding: 1.25rem 0; color: color-mix(in srgb, #141414 62%, #E8E7E2); font-family: \"Schibsted Grotesk\", system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.5; letter-spacing: -0.01em; border-top: 1px solid #141414; } .ds-rail-empty code { font-family: inherit; font-weight: 600; color: #141414; }"
+    },
+    {
+      "name": "Colophon",
+      "kind": "custom",
+      "refersTo": "skip",
+      "description": "Client fact and round-seal return in diluted ink at label size.",
+      "html": "<footer class=\"ds-colophon\"><p>Cliente Dr. Rocha. Nos protótipos, o selo redondo da VITROLA volta a esta lista.</p></footer>",
+      "css": ".ds-colophon p { margin: 0; color: color-mix(in srgb, #141414 62%, #E8E7E2); font-family: \"Schibsted Grotesk\", system-ui, sans-serif; font-size: 0.92rem; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "House Letterhead",
+    "overview": "VITROLA is the web software factory's evaluation room, nested as a house brand inside a client product repo. This surface is not a product landing and not a card gallery. It is the letterhead the client came to use: studio name at display scale, trade line, a grooved phonograph disc with the vitrola engraving as its label, a measured brief, then a numbered staff of prototypes. The list is the document. The disc is the house mark — the object the house is named for.\n\nThe field is uncoated paper; the voice is black ink. Hierarchy is Schibsted Grotesk in size and weight steps. Modules sit flush left on one sheet. Rows are open type on the field — no tiles, no enclosure, no lift. Client name (Dr. Rocha) appears as a fact in the brief and colophon; it does not lend clinical color, chrome, or product UI to this letterhead. On mockups, the same circular mark is injected as a floating return overlay; it is house chrome on a foreign page, not a second surface on the letterhead.",
+    "keyCharacteristics": [
+      "Paper field, ink type, ink staff rules — one material on the sheet",
+      "Grooved disc with ink-engraving label on the mast; same mark as the mockup overlay",
+      "Single grotesque; display through label are size steps of the same face",
+      "Flush-left modules on a 12-column sheet; the brief is a measure, not a card",
+      "Numbered rail is the only action on the gallery; hover underlines the title",
+      "Square letterhead except the disc; signal wine appears only as the focus ring"
+    ],
+    "rules": [
+      { "name": "The Ink-on-Paper Rule", "body": "The field is paper. Type, staff, and grooves are ink. Diluted ink is for secondary reading. Signal is reserved for focus.", "section": "colors" },
+      { "name": "The Size-Step Rule", "body": "One family. Hierarchy is size, weight, and tracking. Never introduce a display serif, a mono for chrome, or a second grotesque.", "section": "typography" },
+      { "name": "The Module Rule", "body": "One grid, typographic state. Modules are flush-left blocks on the sheet. Do not center the brief as a card, and do not park content in interior columns for decoration.", "section": "layout" },
+      { "name": "The Staff Rule", "body": "The list is a vertical staff of full ink rules. Rules are 1px solid ink on paper — not diluted hairlines, not box strokes around a tile.", "section": "elevation" },
+      { "name": "The Round Exception Rule", "body": "The letterhead is square. The only circle is the phonograph disc — mast seal and overlay. Nothing else is round.", "section": "shapes" },
+      { "name": "The No Enclosure Rule", "body": "A prototype is a row on the staff, not a card. No fill, radius, border-box, or shadow around the item.", "section": "elevation" },
+      { "name": "The Exposed Count Rule", "body": "A folder is a row: number, slug, title, optional summary/status, open.", "section": "elevation" },
+      { "name": "The Grooves-Only Rule", "body": "The platter turns the groove rings only (90s linear, infinite). The engraving label stays still. Under prefers-reduced-motion, the disc does not spin.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do set the studio wordmark at display scale, keep the trade line directly under it, and trail the identity with the grooved disc.",
+      "Do treat the numbered rail as the only action on the first viewport.",
+      "Do draw staff rules in 1px solid ink (mast, row tops, rail foot).",
+      "Do underline the prototype title on hover and focus-visible (1px, offset 0.18em) and nowhere else.",
+      "Do keep the brief in the 38rem measure and the sheet flush left.",
+      "Do inject the same circular mark onto mockups as the return overlay."
+    ],
+    "donts": [
+      "Don't enclose rows in cards, tiles, chips, or bordered panels.",
+      "Don't bring Dr. Rocha clinical/teal product tokens onto this letterhead.",
+      "Don't add a kicker or room-label above the heading; the trade line under the wordmark is the only house identification.",
+      "Don't animate rows on entrance, stagger, or cascade. The sheet is still; the only motion is the groove spin.",
+      "Don't introduce a second type family, a second mark, or a filled accent button as the primary action. The rail opens prototypes; the disc is the house seal, not a CTA.",
+      "Don't round anything except the disc, spin the engraving, or place the overlay on the gallery."
+    ]
+  }
+}

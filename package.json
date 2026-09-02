@@ -1,0 +1,16 @@
+{
+  "name": "vitrola-prototypes",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Sala de avaliação de protótipos VITROLA",
+  "scripts": {
+    "start": "node start.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "vite": "^7.1.0"
+  }
+}
