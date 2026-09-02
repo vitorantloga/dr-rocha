@@ -96,6 +96,20 @@ async function main() {
     path.join(DIST, 'api', 'prototypes.json'),
     `${JSON.stringify(publicPrototypeList(), null, 2)}\n`,
   )
+  fs.writeFileSync(
+    path.join(DIST, 'vercel.json'),
+    `${JSON.stringify(
+      {
+        trailingSlash: true,
+        rewrites: [
+          { source: '/api/prototypes', destination: '/api/prototypes.json' },
+          { source: '/mocks/:slug/:path*', destination: '/mocks/:slug/index.html' },
+        ],
+      },
+      null,
+      2,
+    )}\n`,
+  )
 
   const mocks = discoverMocks()
   if (!mocks.length) console.log('Nenhum mockup em mocks/')

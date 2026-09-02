@@ -98,37 +98,35 @@ PORT=4171 npm start
 
 O selo aparece com `npm start` (local) e no site publicado. Se abrir um mockup isolado (`npm run dev` na pasta dele), o selo não entra.
 
-## Publicar (GitHub + Vercel)
+## Publicar (GitHub prepara, você manda para a Vercel)
 
-O **build** roda no GitHub, na `master`. A Vercel **não reconstrói**: só recebe o `dist/` já pronto.
+O push na `master` **não** publica na Vercel. O GitHub só gera o `dist/` e guarda como artifact. Você publica quando quiser.
 
-### 1. Secrets no GitHub
+### 1. Vercel não deve deployar a partir do Git
 
-No repositório: **Settings → Secrets and variables → Actions**. Crie:
+No projeto da Vercel: **Settings → Git → Ignored Build Step** = `exit 0` (o `vercel.json` da raiz já faz isso). Push na `master` não cria deployment.
 
-| Secret | Onde pegar |
-|--------|------------|
-| `VERCEL_TOKEN` | [Vercel → Account Settings → Tokens](https://vercel.com/account/tokens) |
-| `VERCEL_ORG_ID` | Vercel → Project → Settings → General → **Team ID** (ou o `orgId` em `.vercel/project.json` depois de `npx vercel link`) |
-| `VERCEL_PROJECT_ID` | A mesma tela, **Project ID** (ou `projectId` no `.vercel/project.json`) |
+Na primeira vez, no projeto: `npx vercel login` e `npx vercel link`.
 
-### 2. Projeto na Vercel
+### 2. Esperar o build no GitHub
 
-Framework: **Other**. O `vercel.json` já define `outputDirectory: dist`.
+Depois do push, abra **Actions** → workflow **Build**. Quando terminar, baixe o artifact **dist**.
 
-Em **Settings → Git**, no **Ignored Build Step**, use `exit 0` (ou deixe o `ignoreCommand` do `vercel.json`). Assim um `git push` **não** dispara build na Vercel. Quem publica é o workflow `.github/workflows/deploy.yml`.
-
-### 3. Conferir
-
-Depois do push na `master`, abra **Actions** no GitHub. O job **Deploy** instala, gera o `dist/` e manda para a Vercel com `vercel deploy --prebuilt`.
-
-Para gerar o site estático na sua máquina:
+Ou gere na sua máquina:
 
 ```bash
 npm run build
 ```
 
-A pasta `dist/` é o que a Vercel publica.
+### 3. Publicar na mão
+
+Com a pasta `dist/` pronta (baixada ou gerada localmente):
+
+```bash
+npm run deploy
+```
+
+Isso roda `vercel deploy dist --prod`. A Vercel só recebe o site já buildado.
 
 ## Trabalhar num mockup sozinho
 
